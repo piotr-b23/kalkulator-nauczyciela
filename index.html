@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Przelicza punkty ucznia na procent i ocenę w skali 1–6 z plusami i minusami.">
+  <meta name="theme-color" content="#2446a6">
+  <title>Kalkulator Nauczyciela</title>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="head-text">
+        <h1>Kalkulator Nauczyciela <span>✓</span></h1>
+        <p class="lede">Punkty ze sprawdzianu → procent → ocena w skali 1–6, z plusami i minusami.</p>
+      </div>
+      <button class="theme-btn" id="theme" type="button"><span class="ti" aria-hidden="true"></span><span class="tl"></span></button>
+    </header>
+
+    <main class="grid">
+      <section class="card" aria-labelledby="calc-h">
+        <h2 id="calc-h" class="sr">Obliczanie oceny</h2>
+        <div class="inputs">
+          <div class="field">
+            <label for="max">Maksymalna liczba punktów</label>
+            <div class="num-input"><input id="max" type="text" inputmode="decimal" autocomplete="off" value="40"></div>
+            <span class="hint">Ile punktów można zdobyć</span>
+          </div>
+          <div class="field">
+            <label for="got">Punkty ucznia</label>
+            <div class="num-input">
+              <input id="got" type="text" inputmode="decimal" autocomplete="off" value="31">
+              <button class="step-btn" id="dec" type="button" aria-label="Odejmij punkt">−</button>
+              <button class="step-btn" id="inc" type="button" aria-label="Dodaj punkt">+</button>
+            </div>
+            <span class="hint">Enter zaznacza pole dla kolejnego ucznia</span>
+          </div>
+        </div>
+
+        <div class="result" aria-live="polite">
+          <div>
+            <div class="eyebrow">Wynik procentowy</div>
+            <div class="pct" id="pct">–</div>
+            <div class="pct-sub" id="pct-sub"></div>
+          </div>
+          <div class="mark-box">
+            <div class="mark" id="mark">–</div>
+            <div class="mark-name" id="mark-name"></div>
+          </div>
+          <div class="notes" id="notes"></div>
+        </div>
+
+        <div class="msg" id="msg" hidden></div>
+
+        <div class="scale">
+          <div class="eyebrow">Skala ocen</div>
+          <div class="bar" id="bar"></div>
+          <div class="ticks" id="ticks"></div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="set-h">
+        <div class="settings-head">
+          <h2 id="set-h">Progi procentowe</h2>
+          <label class="switch" for="mods">
+            <input type="checkbox" id="mods" checked>
+            <span class="track" aria-hidden="true"></span>
+            Oceny z plusem i minusem
+          </label>
+        </div>
+
+        <div class="controls">
+          <label class="control" for="rounding">Zaokrąglanie procentu
+            <select id="rounding">
+              <option value="exact">Bez zaokrąglania (np. 69,5%)</option>
+              <option value="round">Do pełnych (69,5% → 70%)</option>
+              <option value="down">W dół (69,9% → 69%)</option>
+              <option value="up">W górę (69,1% → 70%)</option>
+            </select>
+          </label>
+          <label class="control" for="step">Punkty przyznawane co
+            <select id="step">
+              <option value="1">1 punkt</option>
+              <option value="0.5">0,5 punktu</option>
+              <option value="0.25">0,25 punktu</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="presets" id="presets"><span class="label">Gotowe progi:</span></div>
+
+        <div class="table-wrap">
+          <table>
+            <thead id="thead"></thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+        <p class="table-note" id="table-note"></p>
+
+        <div class="share">
+          <div class="share-row">
+            <label for="code">Kod ustawień</label>
+            <div class="code-box">
+              <input id="code" type="text" readonly spellcheck="false">
+              <button class="btn" id="copy" type="button">Kopiuj kod</button>
+            </div>
+            <span class="hint">Zawiera progi, plusy i minusy, zaokrąglanie oraz krok punktów. Kod dopisany do linku strony po znaku # wczyta ustawienia przy otwarciu.</span>
+          </div>
+          <div class="share-row">
+            <label for="paste">Wklej kod ustawień</label>
+            <div class="code-box">
+              <input id="paste" type="text" spellcheck="false" autocomplete="off" placeholder="np. S04xfDF8ZXwx…">
+              <button class="btn" id="load" type="button">Wczytaj</button>
+            </div>
+            <span class="err" id="paste-err" hidden></span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Strona nie zbiera danych osobowych i nie używa plików cookies. Ustawienia (progi, tryb) zapisują się wyłącznie w pamięci tej przeglądarki. Hosting: GitHub Pages, który zapisuje adresy IP odwiedzających ze względów bezpieczeństwa.</p>
+      <p>Czcionki: Caveat, IBM Plex Mono, Schibsted Grotesk na licencji SIL Open Font License 1.1.</p>
+    </footer>
+  </div>
+  <div class="toast" id="toast" hidden></div>
+</body>
+</html>
